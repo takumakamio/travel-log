@@ -30,7 +30,6 @@ const Add = () => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenAlert(false);
   };
   return (

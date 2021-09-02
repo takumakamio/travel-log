@@ -5,16 +5,22 @@ import {
   ExitToApp,
   Home,
   Person,
-  PhotoCamera,
-  PlayCircleOutline,
   Settings,
-  Storefront,
   TabletMac,
 } from "@material-ui/icons";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/auth/AuthContext";
 import { useStyles } from "./styles";
 
 const Leftbar = () => {
   const classes = useStyles();
+  const { user, dispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
+
   return (
     <Container className={classes.container}>
       <div className={classes.item}>
@@ -29,14 +35,7 @@ const Leftbar = () => {
         <List className={classes.icon} />
         <Typography className={classes.text}>Lists</Typography>
       </div>
-      <div className={classes.item}>
-        <PhotoCamera className={classes.icon} />
-        <Typography className={classes.text}>Camera</Typography>
-      </div>
-      <div className={classes.item}>
-        <PlayCircleOutline className={classes.icon} />
-        <Typography className={classes.text}>Videos</Typography>
-      </div>
+
       <div className={classes.item}>
         <TabletMac className={classes.icon} />
         <Typography className={classes.text}>Apps</Typography>
@@ -45,17 +44,17 @@ const Leftbar = () => {
         <Bookmark className={classes.icon} />
         <Typography className={classes.text}>Collections</Typography>
       </div>
-      <div className={classes.item}>
-        <Storefront className={classes.icon} />
-        <Typography className={classes.text}>Market Place</Typography>
-      </div>
-      <div className={classes.item}>
-        <Settings className={classes.icon} />
-        <Typography className={classes.text}>Settings</Typography>
-      </div>
+      <Link to="/settings" className="link">
+        <div className={classes.item}>
+          <Settings className={classes.icon} />
+          <Typography className={classes.text}>Settings</Typography>
+        </div>
+      </Link>
       <div className={classes.item}>
         <ExitToApp className={classes.icon} />
-        <Typography className={classes.text}>Logout</Typography>
+        <Typography className={classes.text} onClick={handleLogout}>
+          Logout
+        </Typography>
       </div>
     </Container>
   );
