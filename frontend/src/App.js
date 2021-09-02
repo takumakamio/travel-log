@@ -1,38 +1,36 @@
-import { Grid, makeStyles } from "@material-ui/core";
-import Add from "./components/Add/Add";
-import Feed from "./components/Feed/Feed";
-import Leftbar from "./components/Leftbar/Leftbar";
-import Navbar from "./components/Navbar/Navbar";
-import Rightbar from "./components/Rightbar/Rightbar";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { useContext } from "react";
 
-const useStyles = makeStyles((theme) => ({
-  right: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  },
-}));
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import { AuthContext } from "./context/auth/AuthContext";
+import Settings from "./pages/Setting/Settings";
 
-const App = () => {
-  const classes = useStyles();
+function App() {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   return (
-    <div>
-      <Navbar />
-      
-      <Grid container>
-        <Grid item sm={2} xs={2}>
-          <Leftbar />
-        </Grid>
-        <Grid item sm={7} xs={10}>
-          <Feed />
-        </Grid>
-        <Grid item sm={3} className={classes.right}>
-          <Rightbar />
-        </Grid>
-      </Grid>
-      <Add />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/register">{user ? <Home /> : <Register />}</Route>
+        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        {/* <Route path="/write">{user ? <Write /> : <Register />}</Route> */}
+        <Route path="/settings">{user ? <Settings /> : <Register />}</Route>
+        {/* <Route path="/post/:postId"> */}
+        {/* <Single />
+        </Route> */}
+      </Switch>
+    </Router>
   );
-};
+}
 
 export default App;
