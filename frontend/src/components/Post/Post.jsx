@@ -9,21 +9,17 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "./styles";
 
-
-const Post = ({ img, title }) => {
+const Post = ({ post }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <CardMedia className={classes.media} image={img} title="My Post" />
+        <CardMedia className={classes.media} image={post.img} title="My Post" />
         <CardContent>
           <Typography gutterBottom variant="h5">
-            {title}
+            {post.title}
           </Typography>
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            consectetur earum est.
-          </Typography>
+          <Typography variant="body2">{post.desc}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

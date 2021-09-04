@@ -1,35 +1,52 @@
 import { Container } from "@material-ui/core";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/auth/AuthContext";
 import Post from "../Post/Post";
 import { useStyles } from "./styles";
+import axios from "axios";
+import Share from "../Share/Share";
 
-const Feed = () => {
+const Feed = ({ username }) => {
+  const [posts, setPosts] = useState([]);
+  const { user } = useContext(AuthContext);
   const classes = useStyles();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = username
+        ? await axios.get("/posts/profile/" + username, {
+            headers: {
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
+            },
+          })
+        : await axios.get("posts/timeline/" + user._id, {
+            headers: {
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
+            },
+          });
+      setPosts(
+        res.data.sort((p1, p2) => {
+          return new Date(p2.createdAt) - new Date(p1.createdAt);
+        })
+      );
+    };
+    fetchPosts();
+  }, [username, user._id]);
+
   return (
     <Container className={classes.container}>
-      <Post
-        title="Choose the perfect design"
-        img="https://images.pexels.com/photos/7319337/pexels-photo-7319337.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-      />
-      <Post
-        title="Simply Recipes Less Stress. More Joy"
-        img="https://images.pexels.com/photos/7363671/pexels-photo-7363671.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-      />
-      <Post
-        title="What To Do In London"
-        img="https://images.pexels.com/photos/7245535/pexels-photo-7245535.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-      />
-      <Post
-        title="Recipes That Will Make You Crave More"
-        img="https://images.pexels.com/photos/7245477/pexels-photo-7245477.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-      />
-      <Post
-        title="Shortcut Travel Guide to Manhattan"
-        img="https://images.pexels.com/photos/7078467/pexels-photo-7078467.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-      />
-      <Post
-        title="Killer Actions to Boost Your Self-Confidence"
-        img="https://images.pexels.com/photos/7833646/pexels-photo-7833646.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-      />
+      <div className="feed">
+        <div className="feedWrapper">
+          {(!username || username === user.username) && <Share />}
+          {posts.map((p) => (
+            <Post key={p._id} post={p} />
+          ))}
+        </div>
+      </div>
     </Container>
   );
 };

@@ -8,6 +8,7 @@ const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
+const verify = require("./verifyToken");
 
 dotenv.config();
 
@@ -36,9 +37,11 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
+app.post("/api/upload", verify, upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
 });
+
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // Routes
 app.use("/api/auth", authRoute);
