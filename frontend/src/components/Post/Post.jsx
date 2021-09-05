@@ -11,10 +11,16 @@ import { useStyles } from "./styles";
 
 const Post = ({ post }) => {
   const classes = useStyles();
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <CardMedia className={classes.media} image={post.img} title="My Post" />
+        <CardMedia
+          className={classes.media}
+          image={PF + post.img}
+          title="My Post"
+        />
         <CardContent>
           <Typography gutterBottom variant="h5">
             {post.title}

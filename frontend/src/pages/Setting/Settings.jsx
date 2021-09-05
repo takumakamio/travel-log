@@ -13,7 +13,7 @@ export default function Settings() {
   const [success, setSuccess] = useState(false);
 
   const { user, dispatch } = useContext(AuthContext);
-  const PF = "http://localhost:8800/images/";
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ export default function Settings() {
       const filename = Date.now() + file.name;
       data.append("name", filename);
       data.append("file", file);
-      updatedUser.profilePic = filename;
+      updatedUser.profilePicture = filename;
       try {
         await axios.post("/upload", data);
       } catch (err) {}
@@ -42,7 +42,7 @@ export default function Settings() {
         },
       });
       setSuccess(true);
-      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      dispatch({ type: "UPDATE_SUCCESS", payload: res.data, });
     } catch (err) {
       dispatch({ type: "UPDATE_FAILURE" });
     }

@@ -23,28 +23,36 @@ const Leftbar = () => {
 
   return (
     <Container className={classes.container}>
-      <div className={classes.item}>
-        <Home className={classes.icon} />
-        <Typography className={classes.text}>Homepage</Typography>
-      </div>
+      <Link to="/" className="link">
+        <div className={classes.item}>
+          <Home className={classes.icon} />
+          <Typography className={classes.text}>Home</Typography>
+        </div>
+      </Link>
+      <Link to="/map" className="link">
+        <div className={classes.item}>
+          <Home className={classes.icon} />
+          <Typography className={classes.text}>Map</Typography>
+        </div>
+      </Link>
       <div className={classes.item}>
         <Person className={classes.icon} />
         <Typography className={classes.text}>Friends</Typography>
       </div>
       <div className={classes.item}>
         <List className={classes.icon} />
-        <Typography className={classes.text}>Lists</Typography>
+        <Typography className={classes.text}>All User's Post</Typography>
       </div>
 
       <div className={classes.item}>
         <TabletMac className={classes.icon} />
-        <Typography className={classes.text}>Apps</Typography>
+        <Typography className={classes.text}>Following Posts</Typography>
       </div>
       <div className={classes.item}>
         <Bookmark className={classes.icon} />
         <Typography className={classes.text}>Collections</Typography>
       </div>
-      <Link to="/settings" className="link">
+      <Link to={`/settings/${user?._id}`} className="link">
         <div className={classes.item}>
           <Settings className={classes.icon} />
           <Typography className={classes.text}>Settings</Typography>

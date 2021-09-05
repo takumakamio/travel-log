@@ -20,7 +20,7 @@ const Navbar = () => {
           Travel Log
         </Typography>
         <Typography variant="h6" className={classes.logoSm}>
-          LAMA
+          Travel Log
         </Typography>
         <div className={classes.search}>
           <Search />

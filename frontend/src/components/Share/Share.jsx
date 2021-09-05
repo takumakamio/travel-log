@@ -29,7 +29,7 @@ export default function Share() {
     e.preventDefault();
     const newPost = {
       userId: user._id,
-      title: desc.current.value,
+      title: title.current.value,
       desc: desc.current.value,
     };
     if (file) {
@@ -68,18 +68,21 @@ export default function Share() {
             src={
               user.profilePicture
                 ? PF + user.profilePicture
-                : PF + "person/noAvatar.png"
+                : PF + "/noAvatar.png"
             }
             alt=""
           />
           <input
-            placeholder={"What's in your mind " + user.username + "?"}
-            className="shareInput"
+            placeholder={"タイトルを記入してください "}
+            className="shareTopInput"
             ref={title}
           />
+        </div>
+        <hr className="shareHr" />
+        <div className="shareMid">
           <input
-            placeholder={"What's in your mind " + user.username + "?"}
-            className="shareInput"
+            placeholder={"詳細を記入してください "}
+            className="shareMidInput"
             ref={desc}
           />
         </div>
