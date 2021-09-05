@@ -22,12 +22,27 @@
   margin-right: 10px;
 }
 
-.shareInput {
+.shareTopInput {
   border: none;
   width: 80%;
 }
 
-.shareInput:focus {
+.shareTopInput:focus {
+  outline: none;
+}
+
+.shareMid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shareMidInput {
+  border: none;
+  width: 80%;
+}
+
+.shareMidInput:focus {
   outline: none;
 }
 

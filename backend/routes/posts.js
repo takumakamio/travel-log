@@ -14,6 +14,7 @@ router.post("/", verify, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 //update a post
 
 router.put("/:id", verify, async (req, res) => {
@@ -44,6 +45,7 @@ router.delete("/:id", verify, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 //like / dislike a post
 
 router.put("/:id/like", verify, async (req, res) => {
@@ -60,12 +62,14 @@ router.put("/:id/like", verify, async (req, res) => {
     res.status(500).json(err);
   }
 });
-//get a post
 
-router.get("/:id", verify, async (req, res) => {
+//get a my post
+
+router.get("/:userId", verify, async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
-    res.status(200).json(post);
+    const currentUser = await User.findById(req.params.userId);
+    const userPosts = await Post.find({ userId: currentUser._id });
+    res.status(200).json(userPosts);
   } catch (err) {
     res.status(500).json(err);
   }

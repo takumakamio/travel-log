@@ -6,13 +6,35 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    username: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
-      max: 30,
+      required: true,
+      min: 3,
+      max: 60,
     },
     desc: {
       type: String,
-      max: 500,
+      required: true,
+      min: 3,
+    },
+    rating: {
+      type: Number,
+      min: 0,
+      max: 5,
+    },
+    categories: {
+      type: Array,
+      required: false,
+    },
+    lng: {
+      type: Number,
+    },
+    lat: {
+      type: Number,
     },
     img: {
       type: String,

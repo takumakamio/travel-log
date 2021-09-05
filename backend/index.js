@@ -29,7 +29,7 @@ mongoose
 //upload images
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images");
+    cb(null, "public/images");
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
@@ -41,7 +41,7 @@ app.post("/api/upload", verify, upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
 });
 
-app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use("/public/images", express.static(path.join(__dirname, "/public/images")));
 
 // Routes
 app.use("/api/auth", authRoute);
