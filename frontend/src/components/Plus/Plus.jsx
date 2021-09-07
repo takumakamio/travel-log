@@ -21,7 +21,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const Add = () => {
+const Plus = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
@@ -129,4 +129,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default Plus;
