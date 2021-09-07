@@ -21,11 +21,11 @@ const UserSchema = new mongoose.Schema(
       min: 6,
     },
     profilePicture: {
-      type: String,
+      type: Object,
       default: "",
     },
     coverPicture: {
-      type: String,
+      type: Object,
       default: "",
     },
     followers: {
@@ -51,10 +51,6 @@ const UserSchema = new mongoose.Schema(
     from: {
       type: String,
       max: 50,
-    },
-    relationship: {
-      type: Number,
-      enum: [1, 2, 3],
     },
   },
   { timestamps: true }

@@ -3,15 +3,33 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
+    paddingTop: theme.spacing(3),
     color: "white",
-    paddingTop: theme.spacing(10),
     backgroundColor: theme.palette.primary.main,
     position: "sticky",
     top: 0,
     [theme.breakpoints.up("sm")]: {
-      backgroundColor: "white",
-      color: "#555",
+      backgroundColor: "teal",
+      color: "white",
       border: "1px solid #ece7e7",
+    },
+  },
+  logoLg: {
+    display: "flex",
+    textAlign: "center",
+    backgroundColor: "white",
+    borderRadius: "5px",
+    color: "teal",
+    marginBottom: theme.spacing(3),
+    fontWeight: 800,
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
+  },
+  logoSm: {
+    display: "block",
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
   },
   item: {

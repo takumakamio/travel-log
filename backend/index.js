@@ -14,7 +14,10 @@ dotenv.config();
 
 // Middleware
 app.use(express.json());
-app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use(
+  "/public/images",
+  express.static(path.join(__dirname, "/public/images"))
+);
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -26,22 +29,7 @@ mongoose
   .then(console.log("connected to mongo"))
   .catch((err) => console.log(err));
 
-//upload images
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, req.body.name);
-  },
-});
 
-const upload = multer({ storage: storage });
-app.post("/api/upload", verify, upload.single("file"), (req, res) => {
-  res.status(200).json("File has been uploaded");
-});
-
-app.use("/public/images", express.static(path.join(__dirname, "/public/images")));
 
 // Routes
 app.use("/api/auth", authRoute);

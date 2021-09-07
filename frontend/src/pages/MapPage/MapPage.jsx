@@ -11,7 +11,6 @@ const MapPage = () => {
   const classes = useStyles();
   return (
     <div>
-      <Navbar />
       <Grid container>
         <Grid item sm={2} xs={2}>
           <Leftbar />

@@ -13,13 +13,11 @@ const PostSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      min: 3,
       max: 60,
     },
     desc: {
       type: String,
       required: true,
-      min: 3,
     },
     rating: {
       type: Number,
@@ -37,11 +35,14 @@ const PostSchema = new mongoose.Schema(
       type: Number,
     },
     img: {
-      type: String,
+      type: Object,
     },
     likes: {
       type: Array,
       default: [],
+    },
+    comment: {
+      type: Array,
     },
   },
   { timestamps: true }

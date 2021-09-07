@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-import Navbar from "../../components/Navbar/Navbar";
 import Leftbar from "../../components/Leftbar/Leftbar";
 import Feed from "../../components/Feed/Feed";
 import Rightbar from "../../components/Rightbar/Rightbar";
@@ -25,12 +24,42 @@ export default function Profile() {
 
   return (
     <div>
-      <Navbar />
       <Grid container>
         <Grid item sm={2} xs={2}>
           <Leftbar />
         </Grid>
         <Grid item sm={7} xs={10}>
+          <div className="profileRight">
+            <div className="profileRightTop">
+              <div className="profileCover">
+                <img
+                  className="profileCoverImg"
+                  src={
+                    user.coverPicture
+                      ? PF + user.coverPicture
+                      : PF + "person/noCover.png"
+                  }
+                  alt=""
+                />
+                <img
+                  className="profileUserImg"
+                  src={
+                    user.profilePicture
+                      ? PF + user.profilePicture
+                      : PF + "person/noAvatar.png"
+                  }
+                  alt=""
+                />
+              </div>
+              <div className="profileInfo">
+                <h4 className="profileInfoName">{user.username}</h4>
+                <span className="profileInfoDesc">{user.desc}</span>
+              </div>
+            </div>
+            <div className="profileRightBottom">
+              <Feed username={username} />
+            </div>
+          </div>
           <Feed />
         </Grid>
         <Grid item sm={3} className={classes.right}>

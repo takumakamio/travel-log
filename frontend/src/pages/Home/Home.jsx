@@ -2,7 +2,6 @@ import { Grid } from "@material-ui/core";
 import Add from "../../components/Add/Add";
 import Feed from "../../components/Feed/Feed";
 import Leftbar from "../../components/Leftbar/Leftbar";
-import Navbar from "../../components/Navbar/Navbar";
 import Rightbar from "../../components/Rightbar/Rightbar";
 import { useStyles } from "./styles";
 
@@ -10,7 +9,6 @@ const Home = () => {
   const classes = useStyles();
   return (
     <div>
-      <Navbar />
       <Grid container>
         <Grid item sm={2} xs={2}>
           <Leftbar />
