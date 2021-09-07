@@ -1,7 +1,7 @@
 import firebase from "firebase";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_KEY,
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: "travel-log-d42da.firebaseapp.com",
   projectId: "travel-log-d42da",
   storageBucket: "travel-log-d42da.appspot.com",

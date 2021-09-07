@@ -8,8 +8,10 @@ import { useContext } from "react";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import { AuthContext } from "./context/auth/AuthContext";
 import Settings from "./pages/Setting/Settings";
+import Profile from "./pages/Profile/Profile";
+import { AuthContext } from "./context/auth/AuthContext";
+
 import MapPage from "./pages/MapPage/MapPage";
 
 function App() {
@@ -26,6 +28,9 @@ function App() {
         <Route path="/map">{user ? <MapPage /> : <Register />}</Route>
         <Route path={`/settings/${user?._id}`}>
           {user ? <Settings /> : <Register />}
+        </Route>
+        <Route path={`/profile/${user?.username}`}>
+          {user ? <Profile /> : <Register />}
         </Route>
         {/* <Route path="/post/:postId"> */}
         {/* <Single />

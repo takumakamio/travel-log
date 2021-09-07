@@ -1,13 +1,14 @@
 import { Container, Typography } from "@material-ui/core";
 import {
   Bookmark,
-  List,
   ExitToApp,
   Home,
   Person,
   Settings,
-  TabletMac,
 } from "@material-ui/icons";
+import FilterIcon from "@material-ui/icons/Filter";
+import FilterBAndWIcon from "@material-ui/icons/FilterBAndW";
+import MapIcon from "@material-ui/icons/Map";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth/AuthContext";
@@ -23,6 +24,12 @@ const Leftbar = () => {
 
   return (
     <Container className={classes.container}>
+      <Typography variant="h6" className={classes.logoLg}>
+        Travel Log
+      </Typography>
+      <Typography variant="h6" className={classes.logoSm}>
+        TLG
+      </Typography>
       <Link to="/" className="link">
         <div className={classes.item}>
           <Home className={classes.icon} />
@@ -31,7 +38,7 @@ const Leftbar = () => {
       </Link>
       <Link to="/map" className="link">
         <div className={classes.item}>
-          <Home className={classes.icon} />
+          <MapIcon className={classes.icon} />
           <Typography className={classes.text}>Map</Typography>
         </div>
       </Link>
@@ -40,12 +47,12 @@ const Leftbar = () => {
         <Typography className={classes.text}>Friends</Typography>
       </div>
       <div className={classes.item}>
-        <List className={classes.icon} />
-        <Typography className={classes.text}>All User's Post</Typography>
+        <FilterIcon className={classes.icon} />
+        <Typography className={classes.text}>All User's Posts</Typography>
       </div>
 
       <div className={classes.item}>
-        <TabletMac className={classes.icon} />
+        <FilterBAndWIcon className={classes.icon} />
         <Typography className={classes.text}>Following Posts</Typography>
       </div>
       <div className={classes.item}>
