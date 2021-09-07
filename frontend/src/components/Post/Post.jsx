@@ -12,6 +12,7 @@ const Post = ({ post }) => {
   const [postUser, setPostUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  console.log(post);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -38,7 +39,7 @@ const Post = ({ post }) => {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to={`profile/${postUser.userId}`}>
+            <Link to={`profile/${postUser.username}`}>
               <img
                 className="postProfileImg"
                 src={

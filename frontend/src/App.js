@@ -29,7 +29,7 @@ function App() {
         <Route path={`/settings/${user?._id}`}>
           {user ? <Settings /> : <Register />}
         </Route>
-        <Route path={`/profile/${user?.username}`}>
+        <Route path="/profile/:username">
           {user ? <Profile /> : <Register />}
         </Route>
         {/* <Route path="/post/:postId"> */}

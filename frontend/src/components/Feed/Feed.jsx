@@ -2,14 +2,13 @@ import { Container } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth/AuthContext";
 import Post from "../Post/Post";
-import { useStyles } from "./styles";
 import axios from "axios";
 import Share from "../Share/Share";
+import "./feed.css";
 
 const Feed = ({ username }) => {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
-  const classes = useStyles();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -26,15 +25,13 @@ const Feed = ({ username }) => {
   }, [username, user?._id]);
 
   return (
-    <Container className={classes.container}>
-      <div className="feed">
-        <div className="feedWrapper">
-          {posts.map((p) => (
-            <Post key={p._id} post={p} />
-          ))}
-        </div>
+    <div className="feed">
+      <div className="feedWrapper">
+        {posts.map((p) => (
+          <Post key={p._id} post={p} />
+        ))}
       </div>
-    </Container>
+    </div>
   );
 };
 
