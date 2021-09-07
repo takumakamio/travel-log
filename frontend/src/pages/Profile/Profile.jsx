@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
 import Leftbar from "../../components/Leftbar/Leftbar";
 import Feed from "../../components/Feed/Feed";
 import Rightbar from "../../components/Rightbar/Rightbar";
 import Add from "../../components/Add/Add";
 import { Grid } from "@material-ui/core";
 import { useStyles } from "./styles";
+import { useParams } from "react-router";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -60,10 +60,9 @@ export default function Profile() {
               <Feed username={username} />
             </div>
           </div>
-          <Feed />
         </Grid>
         <Grid item sm={3} className={classes.right}>
-          <Rightbar />
+          {/* <Rightbar user={user} /> */}
         </Grid>
       </Grid>
       <Add />

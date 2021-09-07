@@ -17,7 +17,7 @@ const Home = () => {
           <Feed />
         </Grid>
         <Grid item sm={3} className={classes.right}>
-          <Rightbar />
+          {/* <Rightbar /> */}
         </Grid>
       </Grid>
       <Add />

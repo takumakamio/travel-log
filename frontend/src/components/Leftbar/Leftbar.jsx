@@ -33,36 +33,36 @@ const Leftbar = () => {
       <Link to="/" className="link">
         <div className={classes.item}>
           <Home className={classes.icon} />
-          <Typography className={classes.text}>Home</Typography>
+          <Typography className={classes.text}>ホーム</Typography>
         </div>
       </Link>
       <Link to="/map" className="link">
         <div className={classes.item}>
           <MapIcon className={classes.icon} />
-          <Typography className={classes.text}>Map</Typography>
+          <Typography className={classes.text}>マップ</Typography>
         </div>
       </Link>
       <div className={classes.item}>
         <Person className={classes.icon} />
-        <Typography className={classes.text}>Friends</Typography>
+        <Typography className={classes.text}>フレンド</Typography>
       </div>
       <div className={classes.item}>
         <FilterIcon className={classes.icon} />
-        <Typography className={classes.text}>All User's Posts</Typography>
+        <Typography className={classes.text}>みんなのポスト</Typography>
       </div>
 
       <div className={classes.item}>
         <FilterBAndWIcon className={classes.icon} />
-        <Typography className={classes.text}>Following Posts</Typography>
+        <Typography className={classes.text}>フレンドポスト</Typography>
       </div>
       <div className={classes.item}>
         <Bookmark className={classes.icon} />
-        <Typography className={classes.text}>Collections</Typography>
+        <Typography className={classes.text}>コレクション</Typography>
       </div>
       <Link to={`/settings/${user?._id}`} className="link">
         <div className={classes.item}>
           <Settings className={classes.icon} />
-          <Typography className={classes.text}>Settings</Typography>
+          <Typography className={classes.text}>セッティング</Typography>
         </div>
       </Link>
       <div className={classes.item}>
