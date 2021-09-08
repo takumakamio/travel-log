@@ -11,37 +11,56 @@ export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
-    currentUser.followings.includes(user?.id)
+    currentUser.followings.includes(user?._id)
   );
+
+  const handleClick = async () => {
+    const followedId = {
+      userId: currentUser._id,
+    };
+    try {
+      if (followed) {
+        await axios.put(`/users/${user._id}/unfollow`, followedId, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        dispatch({ type: "UNFOLLOW", payload: user._id });
+        setFollowed(false);
+      } else {
+        await axios.put(`/users/${user._id}/follow`, followedId, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        dispatch({ type: "FOLLOW", payload: user._id });
+        setFollowed(true);
+      }
+    } catch (err) {}
+  };
+
+  useEffect(() => {
+    setFollowed(currentUser.followings.includes(user?._id));
+  }, [user?._id, currentUser.followings]);
 
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
+        const friendList = await axios.get("/users/friends/" + user._id, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
         setFriends(friendList.data);
       } catch (err) {
         console.log(err);
       }
     };
     getFriends();
-  }, [user]);
-
-  const handleClick = async () => {
-    try {
-      if (followed) {
-        await axios.put(`/users/${user._id}/unfollow`, {
-          userId: currentUser._id,
-        });
-        dispatch({ type: "UNFOLLOW", payload: user._id });
-      } else {
-        await axios.put(`/users/${user._id}/follow`, {
-          userId: currentUser._id,
-        });
-        dispatch({ type: "FOLLOW", payload: user._id });
-      }
-      setFollowed(!followed);
-    } catch (err) {}
-  };
+  }, [user, followed]);
 
   const HomeRightbar = () => {
     return (
@@ -105,7 +124,7 @@ export default function Rightbar({ user }) {
                   src={
                     friend.profilePicture
                       ? PF + friend.profilePicture
-                      : PF + "person/noAvatar.png"
+                      : PF + "/noAvatar.png"
                   }
                   alt=""
                   className="rightbarFollowingImg"
