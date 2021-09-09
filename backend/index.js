@@ -9,10 +9,12 @@ const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
 const verify = require("./verifyToken");
+const paginate = require("express-paginate");
 
 dotenv.config();
 
 // Middleware
+app.use(paginate.middleware(1, 50));
 app.use(express.json());
 app.use(
   "/public/images",
@@ -28,8 +30,6 @@ mongoose
   })
   .then(console.log("connected to mongo"))
   .catch((err) => console.log(err));
-
-
 
 // Routes
 app.use("/api/auth", authRoute);

@@ -5,18 +5,20 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useContext } from "react";
+import { AuthContext } from "./context/auth/AuthContext";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Settings from "./pages/Setting/Settings";
 import Profile from "./pages/Profile/Profile";
-import { AuthContext } from "./context/auth/AuthContext";
-
-import MapPage from "./pages/MapPage/MapPage";
+import MyMap from "./pages/MyMap/MyMap";
+import FriendPost from "./pages/FriendPost/FriendPost";
+import ListPage from "./pages/ListPage/ListPage";
+import FriendMap from "./pages/FriendMap/FriendMap";
 
 function App() {
   const { user } = useContext(AuthContext);
-  console.log(user);
+
   return (
     <Router>
       <Switch>
@@ -25,7 +27,10 @@ function App() {
         </Route>
         <Route path="/register">{user ? <Home /> : <Register />}</Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
-        <Route path="/map">{user ? <MapPage /> : <Register />}</Route>
+        <Route path="/mymap">{user ? <MyMap /> : <Login />}</Route>
+        <Route path="/map">{user ? <FriendMap /> : <Login />}</Route>
+        <Route path="/followers">{user ? <FriendPost /> : <Login />}</Route>
+        <Route path="/list">{user ? <ListPage /> : <Login />}</Route>
         <Route path={`/settings/${user?._id}`}>
           {user ? <Settings /> : <Register />}
         </Route>

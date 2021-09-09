@@ -3,10 +3,8 @@ import Add from "../../components/Plus/Plus";
 import Map from "../../components/Map/Map";
 import Feed from "../../components/Feed/Feed";
 import Leftbar from "../../components/Leftbar/Leftbar";
-import Navbar from "../../components/Navbar/Navbar";
-import Rightbar from "../../components/Rightbar/Rightbar";
 
-const MapPage = () => {
+const MyMap = () => {
   return (
     <div>
       <Grid container>
@@ -22,4 +20,4 @@ const MapPage = () => {
   );
 };
 
-export default MapPage;
+export default MyMap;

@@ -1,5 +1,6 @@
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
@@ -12,7 +13,6 @@ const Post = ({ post }) => {
   const [postUser, setPostUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  console.log(post);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -24,7 +24,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
-  }, [currentUser._id, post.likes]);
+  }, [currentUser?._id, post.likes]);
 
   const likeHandler = () => {
     try {
@@ -32,6 +32,15 @@ const Post = ({ post }) => {
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/posts/${post._id}`, {
+        data: { userId: currentUser._id },
+      });
+      window.location.replace(`/profile/${currentUser.username}`);
+    } catch (err) {}
   };
 
   return (
@@ -54,7 +63,9 @@ const Post = ({ post }) => {
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <MoreVert />
+            {post.userId === currentUser?._id && (
+              <DeleteOutlineIcon onClick={handleDelete} />
+            )}
           </div>
         </div>
         <div className="postCenter">

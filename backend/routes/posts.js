@@ -32,7 +32,7 @@ router.put("/:id", verify, async (req, res) => {
 });
 //delete a post
 
-router.delete("/:id", verify, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (post.userId === req.body.userId) {
@@ -68,36 +68,67 @@ router.put("/:id/like", verify, async (req, res) => {
 router.get("/:userId", verify, async (req, res) => {
   try {
     const currentUser = await User.findById(req.params.userId);
-    const userPosts = await Post.find({ userId: currentUser._id });
+    const userPosts = await Post.find({ userId: currentUser._id }).sort({
+      createdAt: -1,
+    });
+
     res.status(200).json(userPosts);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//get timeline posts
+//get friends posts
 
 router.get("/timeline/:userId", async (req, res) => {
   try {
     const currentUser = await User.findById(req.params.userId);
-    const userPosts = await Post.find({ userId: currentUser._id });
+    const userPosts = await Post.find({ userId: currentUser._id })
+      .sort({ createdAt: -1 })
+      .limit(50);
     const friendPosts = await Promise.all(
       currentUser.followings.map((friendId) => {
         return Post.find({ userId: friendId });
       })
     );
-    res.status(200).json(userPosts.concat(...friendPosts));
+    res.status(200).json(...friendPosts);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//get someones's posts
+//get a person's posts
 
 router.get("/profile/:username", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
-    const posts = await Post.find({ userId: user._id });
+    const posts = await Post.find({ userId: user._id }).sort({ createdAt: -1 });
+
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//get all user's posts || specific post
+router.get("/", async (req, res) => {
+  const username = req.query.user;
+  const catName = req.query.cat;
+  try {
+    let posts;
+    if (username) {
+      posts = await Post.find({ username }).sort({ createdAt: -1 }).limit(50);
+    } else if (catName) {
+      posts = await Post.find({
+        categories: {
+          $in: [catName],
+        },
+      })
+        .sort({ createdAt: -1 })
+        .limit(50);
+    } else {
+      posts = await Post.find().sort({ createdAt: -1 }).limit(50);
+    }
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);
