@@ -4,6 +4,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth/AuthContext";
 import Rightbar from "../../components/Rightbar/Rightbar";
+import Leftbar from "../../components/Leftbar/Leftbar";
 
 export default function Settings() {
   const [file, setFile] = useState(null);
@@ -42,13 +43,14 @@ export default function Settings() {
         },
       });
       setSuccess(true);
-      dispatch({ type: "UPDATE_SUCCESS", payload: res.data, });
+      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
     } catch (err) {
       dispatch({ type: "UPDATE_FAILURE" });
     }
   };
   return (
     <div className="settings">
+      <Leftbar />
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsUpdateTitle">Update Your Account</span>

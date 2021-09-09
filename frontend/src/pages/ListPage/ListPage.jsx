@@ -3,10 +3,11 @@ import Plus from "../../components/Plus/Plus";
 import Feed from "../../components/Feed/Feed";
 import Leftbar from "../../components/Leftbar/Leftbar";
 import Rightbar from "../../components/Rightbar/Rightbar";
-import "./home.css";
+import "./listPage.css";
 import axios from "axios";
+import List from "../../components/List/List";
 
-const Home = () => {
+const ListPage = () => {
   const [allPosts, setAllPosts] = useState([]);
   useEffect(() => {
     const fetchPosts = async () => {
@@ -15,11 +16,12 @@ const Home = () => {
     };
     fetchPosts();
   }, []);
+  
   return (
     <>
-      <div className="homeContainer">
+      <div className="listPageContainer">
         <Leftbar />
-        <Feed allPosts={allPosts} />
+        <List />
         <Rightbar />
         <Plus />
       </div>
@@ -27,4 +29,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ListPage;

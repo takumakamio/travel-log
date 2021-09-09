@@ -4,7 +4,6 @@ import Leftbar from "../../components/Leftbar/Leftbar";
 import Feed from "../../components/Feed/Feed";
 import Rightbar from "../../components/Rightbar/Rightbar";
 import Plus from "../../components/Plus/Plus";
-
 import { useParams } from "react-router";
 import "./profile.css";
 

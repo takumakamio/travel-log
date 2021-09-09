@@ -37,6 +37,10 @@
 .postDate {
   font-size: 12px;
 }
+.postTopRight {
+  color: red;
+  cursor: pointer;
+}
 
 .postCenter {
   margin: 20px 0;
