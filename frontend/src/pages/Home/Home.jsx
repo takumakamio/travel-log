@@ -20,7 +20,7 @@ const Home = () => {
       <div className="homeContainer">
         <Leftbar />
         <Feed allPosts={allPosts} />
-        <Rightbar />
+
         <Plus />
       </div>
     </>

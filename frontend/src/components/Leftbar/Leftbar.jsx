@@ -31,7 +31,7 @@ const Leftbar = () => {
           <div className="leftbarTitleIcon">
             <LoyaltyIcon />
           </div>
-          <div className="leftbarTitleLetter">Travel Log </div>
+          <div className="leftbarTitleLetter">SHIORI </div>
         </div>
         <ul className="leftbarList">
           {user ? (
@@ -42,34 +42,30 @@ const Leftbar = () => {
                   <span className="leftbarListItemText">ホーム</span>
                 </li>
               </Link>
-              <Link to="/mymap" className="link">
+              <Link to="/map" className="link">
                 <li className="leftbarListItem">
                   <MapIcon className="leftbarIcon" />
                   <span className="leftbarListItemText">マイマップ</span>
                 </li>
               </Link>
-              <Link to={`/profile/${user.username}`} className="link">
+              <Link to={`/profile/${user._id}`} className="link">
                 <li className="leftbarListItem">
                   <Person className="leftbarIcon" />
                   <span className="leftbarListItemText">マイポスト</span>
                 </li>
               </Link>
-              <Link to={"/followers"} className="link">
+              <Link to="/followers" className="link">
                 <li className="leftbarListItem">
                   <FilterIcon className="leftbarIcon" />
                   <span className="leftbarListItemText">フレンドポスト</span>
                 </li>
               </Link>
-              <Link to={"/list"} className="link">
+              <Link to="/list" className="link">
                 <li className="leftbarListItem">
                   <GroupIcon className="leftbarIcon" />
                   <span className="leftbarListItemText">フレンドリスト</span>
                 </li>
               </Link>
-              <li className="leftbarListItem">
-                <Bookmark className="leftbarIcon" />
-                <span className="leftbarListItemText">コレクション</span>
-              </li>
               <Link to={`/settings/${user?._id}`} className="link">
                 <li className="leftbarListItem">
                   <Settings className="leftbarIcon" />

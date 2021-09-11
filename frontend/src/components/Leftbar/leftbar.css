@@ -35,7 +35,6 @@
 
 .leftbarTitleIcon {
   margin-top: 3px;
-  margin-right: 5px;
 }
 .leftbarTitleLetter {
   font-size: 20px;
@@ -59,4 +58,33 @@
 
 .leftbarIcon {
   margin-right: 15px;
+}
+
+@media screen and (max-width: 780px) {
+  .leftbarListItemText {
+    display: none;
+  }
+  .leftbarWrapper {
+    padding: 20px;
+  }
+  .leftbarTitle {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    list-style: none;
+    border-radius: 100%;
+  }
+  .leftbarTitleLetter {
+    display: none;
+  }
+  .leftbarTitleIcon {
+    color: teal;
+    margin: 0;
+  }
+  .leftbarList {
+    padding: 0;
+    margin: auto;
+    list-style: none;
+    color: white;
+  }
 }

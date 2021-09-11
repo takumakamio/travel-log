@@ -1,9 +1,42 @@
 .feed {
-  flex: 7;
+  flex: 8;
   margin-left: 5%;
   margin-right: 5%;
 }
 
 .feedWrapper {
-  padding: 20px;
+}
+
+.searchbar {
+  width: 70%;
+  margin: 0 auto;
+  height: 30px;
+  background-color: white;
+  border: solid 3px teal;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 4%;
+}
+
+.searchIcon {
+  font-size: 20px !important;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 22% 0 5%;
+}
+
+.searchInput {
+  border: none;
+  width: 100%;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+#clearBtn {
+  cursor: pointer;
 }

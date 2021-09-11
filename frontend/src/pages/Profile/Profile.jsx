@@ -10,15 +10,16 @@ import "./profile.css";
 export default function Profile() {
   const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const username = useParams().username;
+  const friendId = useParams().id;
+  console.log(friendId);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${username}`);
+      const res = await axios.get(`/users?userId=${friendId}`);
       setUser(res.data);
     };
     fetchUser();
-  }, [username]);
+  }, [friendId]);
 
   return (
     <>
@@ -31,7 +32,7 @@ export default function Profile() {
                 className="profileCoverImg"
                 src={
                   user.coverPicture
-                    ? PF + user.coverPicture
+                    ? user.coverPicture.img
                     : PF + "/noCover.png"
                 }
                 alt=""
@@ -40,7 +41,7 @@ export default function Profile() {
                 className="profileUserImg"
                 src={
                   user.profilePicture
-                    ? PF + user.profilePicture
+                    ? user.profilePicture.img
                     : PF + "/noAvatar.png"
                 }
                 alt=""
@@ -51,7 +52,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username={username} />
+            <Feed friendId={friendId} />
             <Rightbar user={user} />
             <Plus />
           </div>

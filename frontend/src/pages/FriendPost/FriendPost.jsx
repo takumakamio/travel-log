@@ -10,7 +10,7 @@ const FriendPost = () => {
       <div className="friendPostContainer">
         <Leftbar />
         <Feed />
-        <Rightbar />
+
         <Plus />
       </div>
     </>

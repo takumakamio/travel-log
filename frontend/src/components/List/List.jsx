@@ -60,10 +60,10 @@ const List = () => {
           <div className="listFollowings">
             {followings.map((following) => (
               <Link
-                to={"/profile/" + following.username}
+                to={"/profile/" + following._id}
                 style={{ textDecoration: "none" }}
               >
-                <div className="listFollowing">
+                <div className="listFollowingWrapper">
                   <img
                     src={
                       following.profilePicture
@@ -87,10 +87,10 @@ const List = () => {
           <div className="listFollowings">
             {followers.map((follower) => (
               <Link
-                to={"/profile/" + follower.username}
+                to={"/profile/" + follower._id}
                 style={{ textDecoration: "none" }}
               >
-                <div className="listFollowing">
+                <div className="listFollowingWrapper">
                   <img
                     src={
                       follower.profilePicture
