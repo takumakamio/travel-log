@@ -1,31 +1,32 @@
-import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { useState, useRef, useCallback, useContext } from "react";
+import "./map.css";
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
-import { PermMedia, Room, Star } from "@material-ui/icons";
 import { useEffect } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
-import "./map.css";
 import storage from "../../firebase";
 import { AuthContext } from "../../context/auth/AuthContext";
-import { CircularProgress } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
+import { PermMedia, Room, Star } from "@material-ui/icons";
+import {
+  CircularProgress,
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+} from "@material-ui/core";
 
-function Map({ friend }) {
+function Map({ friendId }) {
   const { user } = useContext(AuthContext);
   const [pins, setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [title, setTitle] = useState(null);
-  const [desc, setDesc] = useState(null);
-  const [star, setStar] = useState(1);
-  const [img, setImg] = useState(null);
-  const [uploaded, setUploaded] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState("風景");
+  const [img, setImg] = useState(null); //for firebase storage
+  const [uploaded, setUploaded] = useState(0); //for firebase storage
+  const [loading, setLoading] = useState(false); //for firebase storage
   const mapRef = useRef(); //for geocoder
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [viewport, setViewport] = useState({
@@ -69,12 +70,12 @@ function Map({ friend }) {
     setLoading(true);
   };
 
-  //Get All My Pin
+  //Get All Someone's Pin
   useEffect(() => {
     const getPins = async () => {
-      const id = friend ? friend._id : user._id;
+      const userId = friendId ? friendId : user._id;
       try {
-        const myPins = await axios.get("posts/" + id, {
+        const myPins = await axios.get("/posts/" + userId, {
           headers: {
             token:
               "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
@@ -86,7 +87,7 @@ function Map({ friend }) {
       }
     };
     getPins();
-  }, []);
+  }, [user._id, friendId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,8 +95,6 @@ function Map({ friend }) {
       userId: user._id,
       username: user.username,
       title,
-      desc,
-      rating: star,
       lat: newPlace.lat,
       lng: newPlace.lng,
       img,
@@ -180,8 +179,9 @@ function Map({ friend }) {
               onClick={() => handleMarkerClick(p._id, p.lat, p.lng)}
             />
           </Marker>
+
           {p._id === currentPlaceId && (
-            <Popup
+            <Popup // For seeing
               latitude={p.lat}
               longitude={p.lng}
               closeButton={true}
@@ -213,7 +213,7 @@ function Map({ friend }) {
         </>
       ))}
 
-      {newPlace && user && (
+      {!friendId && newPlace && user && (
         <Popup // For Upload
           latitude={newPlace.lat}
           longitude={newPlace.lng}
@@ -249,18 +249,16 @@ function Map({ friend }) {
                 autoFocus
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <label>コメント</label>
-              <input
-                placeholder="(例) 展望台からの景色"
-                onChange={(e) => setDesc(e.target.value)}
-              />
-              <label>レート</label>
-              <select onChange={(e) => setStar(e.target.value)}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+
+              <label>カテゴリー</label>
+              <select onChange={(e) => setCategories(e.target.value)}>
+                <option value="風景">風景</option>
+                <option value="食べ物">食べ物</option>
+                <option value="人物">人物</option>
+                <option value="動物">動物</option>
+                <option value="植物">植物</option>
+                <option value="建物">建物</option>
+                <option value="アート">アート</option>
               </select>
               {uploaded === 1 ? (
                 <button
@@ -271,17 +269,19 @@ function Map({ friend }) {
                   Add Pin
                 </button>
               ) : (
-                <button
-                  className="submitButton"
-                  onClick={handleUpload}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <CircularProgress color="white" size="20px" />
-                  ) : (
-                    " Upload"
-                  )}
-                </button>
+                img && (
+                  <button
+                    className="submitButton"
+                    onClick={handleUpload}
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <CircularProgress color="white" size="20px" />
+                    ) : (
+                      " Upload"
+                    )}
+                  </button>
+                )
               )}
             </form>
           </div>

@@ -25,21 +25,26 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/register">{user ? <Home /> : <Register />}</Route>
-        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
-        <Route path="/mymap">{user ? <MyMap /> : <Login />}</Route>
-        <Route path="/map">{user ? <FriendMap /> : <Login />}</Route>
-        <Route path="/followers">{user ? <FriendPost /> : <Login />}</Route>
-        <Route path="/list">{user ? <ListPage /> : <Login />}</Route>
+        <Route exact path="/register">
+          {user ? <Home /> : <Register />}
+        </Route>
+        <Route exact path="/login">
+          {user ? <Redirect to="/" /> : <Login />}
+        </Route>
+        <Route exact path="/map">
+          {user ? <MyMap /> : <Login />}
+        </Route>
+        <Route path="/map/:id">{user ? <FriendMap /> : <Login />}</Route>
+        <Route path="/profile/:id">{user ? <Profile /> : <Register />}</Route>
+        <Route exact path="/followers">
+          {user ? <FriendPost /> : <Login />}
+        </Route>
+        <Route exact path="/list">
+          {user ? <ListPage /> : <Login />}
+        </Route>
         <Route path={`/settings/${user?._id}`}>
           {user ? <Settings /> : <Register />}
         </Route>
-        <Route path="/profile/:username">
-          {user ? <Profile /> : <Register />}
-        </Route>
-        {/* <Route path="/post/:postId"> */}
-        {/* <Single />
-        </Route> */}
       </Switch>
     </Router>
   );

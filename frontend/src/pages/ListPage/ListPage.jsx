@@ -16,13 +16,12 @@ const ListPage = () => {
     };
     fetchPosts();
   }, []);
-  
+
   return (
     <>
       <div className="listPageContainer">
         <Leftbar />
         <List />
-        <Rightbar />
         <Plus />
       </div>
     </>

@@ -9,13 +9,13 @@ const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
 const verify = require("./verifyToken");
-const paginate = require("express-paginate");
+const cors = require("cors");
 
 dotenv.config();
 
 // Middleware
-app.use(paginate.middleware(1, 50));
 app.use(express.json());
+app.use(cors());
 app.use(
   "/public/images",
   express.static(path.join(__dirname, "/public/images"))

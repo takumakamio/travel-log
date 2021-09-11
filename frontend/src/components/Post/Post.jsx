@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth/AuthContext";
 
 const Post = ({ post }) => {
-  const [like, setLike] = useState(post.likes.length);
+  const [like, setLike] = useState(post.likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [postUser, setPostUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
@@ -23,12 +23,21 @@ const Post = ({ post }) => {
   }, [post.userId]);
 
   useEffect(() => {
-    setIsLiked(post.likes.includes(currentUser._id));
+    setIsLiked(post.likes?.includes(currentUser._id));
   }, [currentUser?._id, post.likes]);
 
   const likeHandler = () => {
     try {
-      axios.put("/posts/" + post._id + "/like", { userId: currentUser._id });
+      axios.put(
+        "/posts/" + post._id + "/like",
+        { userId: currentUser._id },
+        {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
@@ -36,9 +45,18 @@ const Post = ({ post }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${post._id}`, {
-        data: { userId: currentUser._id },
-      });
+      await axios.delete(
+        `/posts/${post._id}`,
+        {
+          data: { userId: currentUser._id },
+        },
+        {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       window.location.replace(`/profile/${currentUser.username}`);
     } catch (err) {}
   };
@@ -48,12 +66,12 @@ const Post = ({ post }) => {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to={`profile/${postUser.username}`}>
+            <Link to={`profile/${postUser._id}`}>
               <img
                 className="postProfileImg"
                 src={
                   postUser.profilePicture
-                    ? PF + postUser.profilePicture
+                    ? postUser.profilePicture.img
                     : PF + "/noAvatar.png"
                 }
                 alt=""
@@ -64,13 +82,16 @@ const Post = ({ post }) => {
           </div>
           <div className="postTopRight">
             {post.userId === currentUser?._id && (
-              <DeleteOutlineIcon onClick={handleDelete} />
+              <DeleteOutlineIcon
+                onClick={handleDelete}
+                style={{ fontSize: "30px" }}
+              />
             )}
           </div>
         </div>
         <div className="postCenter">
           <span className="postText">{post?.title}</span>
-          <img className="postImg" src={post.img.img} alt="" />
+          <img className="postImg" src={post.img?.img} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
@@ -80,16 +101,8 @@ const Post = ({ post }) => {
               onClick={likeHandler}
               alt=""
             />
-            <img
-              className="likeIcon"
-              src={`${PF}heart.png`}
-              onClick={likeHandler}
-              alt=""
-            />
+
             <span className="postLikeCounter">{like} people like it</span>
-          </div>
-          <div className="postBottomRight">
-            <span className="postCommentText">{post.comment} comments</span>
           </div>
         </div>
       </div>

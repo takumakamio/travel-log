@@ -8,16 +8,7 @@ import axios from "axios";
 import { useParams } from "react-router";
 
 const FriendMap = () => {
-  const [friend, setFriend] = useState({});
-  const username = useParams().username;
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${username}`);
-      setFriend(res.data);
-    };
-    fetchUser();
-  }, [username]);
+  const friendId = useParams().id;
 
   return (
     <div>
@@ -26,7 +17,7 @@ const FriendMap = () => {
           <Leftbar />
         </Grid>
         <Grid item sm={10} xs={10}>
-          <Map friend={friend} />
+          <Map friendId={friendId} />
         </Grid>
       </Grid>
       <Add />

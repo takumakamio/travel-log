@@ -16,15 +16,6 @@ const PostSchema = new mongoose.Schema(
       required: true,
       max: 60,
     },
-    desc: {
-      type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-      min: 0,
-      max: 5,
-    },
     categories: {
       type: Array,
       required: false,

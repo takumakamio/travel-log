@@ -2,12 +2,13 @@ import "./rightbar.css";
 import Friend from "../Friend/Friend";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Add, Map, Remove } from "@material-ui/icons";
 import { AuthContext } from "../../context/auth/AuthContext";
 
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const history = useHistory();
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
@@ -62,6 +63,11 @@ export default function Rightbar({ user }) {
     getFriends();
   }, [user, followed]);
 
+  const handleToMap = (e) => {
+    e.preventDefault();
+    history.push(`/map/${user._id}`);
+  };
+
   const HomeRightbar = () => {
     return (
       <>
@@ -92,14 +98,16 @@ export default function Rightbar({ user }) {
               {followed ? <Remove /> : <Add />}
             </button>
           )}
-          <Link to={"/map"}>
+          <Link to={`/map/${user._id}`} className="Link">
             <Map
               style={{
-                fontSize: "40px",
+                fontSize: "60px",
                 color: "teal",
               }}
+              onClick={handleToMap}
             />
           </Link>
+
           <h4 className="rightbarTitle">ユーザー情報</h4>
           <div className="rightbarInfo">
             <div className="rightbarInfoItem">
@@ -114,15 +122,12 @@ export default function Rightbar({ user }) {
           <h4 className="rightbarTitle">フォロー</h4>
           <div className="rightbarFollowings">
             {friends.map((friend) => (
-              <Link
-                to={"/profile/" + friend.username}
-                style={{ textDecoration: "none" }}
-              >
+              <Link to={"/profile/" + friend._id} className="Link">
                 <div className="rightbarFollowing">
                   <img
                     src={
                       friend.profilePicture
-                        ? PF + friend.profilePicture
+                        ? friend.profilePicture.img
                         : PF + "/noAvatar.png"
                     }
                     alt=""

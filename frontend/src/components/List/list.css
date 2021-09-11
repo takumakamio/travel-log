@@ -53,7 +53,7 @@
 .listFollowings {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .listFollowing {
@@ -61,6 +61,11 @@
   flex-direction: column;
   margin-bottom: 20px;
   cursor: pointer;
+}
+.listFollowingWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: 25px;
 }
 
 .listFollowingImg {
@@ -73,6 +78,7 @@
   border-color: rgb(2, 61, 31);
 }
 .listFollowingName {
+  margin: 0;
   text-decoration: none;
   color: rgb(2, 61, 31);
 }

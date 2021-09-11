@@ -2,6 +2,7 @@ const User = require("../models/User");
 const router = require("express").Router();
 const CryptoJS = require("crypto-js");
 const verify = require("../verifyToken");
+const jwt = require("jsonwebtoken");
 
 //update user
 router.put("/:id", verify, async (req, res) => {
@@ -21,7 +22,16 @@ router.put("/:id", verify, async (req, res) => {
         },
         { new: true }
       );
-      res.status(200).json(updatedUser);
+      const user = await User.findById(req.params.id);
+      const accessToken = jwt.sign(
+        { id: user._id, username: user.username },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "30d",
+        }
+      );
+      const { password, ...info } = user._doc;
+      res.status(200).json({ ...info, accessToken });
     } catch (err) {
       res.status(500).json(err);
     }
