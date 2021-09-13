@@ -8,7 +8,7 @@ import axios from "axios";
 import { format } from "timeago.js";
 import storage from "../../firebase";
 import { AuthContext } from "../../context/auth/AuthContext";
-import { PermMedia, Room, Star } from "@material-ui/icons";
+import { PermMedia, Room } from "@material-ui/icons";
 import {
   CircularProgress,
   Card,
@@ -28,7 +28,6 @@ function Map({ friendId }) {
   const [uploaded, setUploaded] = useState(0); //for firebase storage
   const [loading, setLoading] = useState(false); //for firebase storage
   const mapRef = useRef(); //for geocoder
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
@@ -97,6 +96,7 @@ function Map({ friendId }) {
       title,
       lat: newPlace.lat,
       lng: newPlace.lng,
+      categories,
       img,
     };
 
@@ -173,7 +173,7 @@ function Map({ friendId }) {
             <Room // Pin
               style={{
                 fontSize: viewport.zoom * 4,
-                color: p.username === user ? "tomato" : "slateblue",
+                color: "teal",
                 cursor: "pointer",
               }}
               onClick={() => handleMarkerClick(p._id, p.lat, p.lng)}
@@ -188,18 +188,16 @@ function Map({ friendId }) {
               closeOnClick={false}
               anchor="left"
               onClose={() => setCurrentPlaceId(null)}
+              className="cardWrapper"
             >
               <Card className="card">
                 <CardHeader title={p.title} />
                 <CardMedia className="media" image={p.img.img} />
                 <CardContent>
                   <div className="cardInfo">
-                    <label>Review</label>
-                    <p className="desc">{p.desc}</p>
-                    <label>Rating</label>
-                    <div className="stars">
-                      {Array(p.rating).fill(<Star className="star" />)}
-                    </div>
+                    <label>Category</label>
+                    <p className="categories">{p.categories}</p>
+
                     <label>Information</label>
                     <span className="username">
                       <b>{p.username}</b>
@@ -243,9 +241,10 @@ function Map({ friendId }) {
                   />
                 </label>
               </div>
-              <label>地名</label>
+              <label>タイトル</label>
               <input
                 placeholder="(例) 東京タワー"
+                required
                 autoFocus
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -258,7 +257,7 @@ function Map({ friendId }) {
                 <option value="動物">動物</option>
                 <option value="植物">植物</option>
                 <option value="建物">建物</option>
-                <option value="アート">アート</option>
+                <option value="美術">美術</option>
               </select>
               {uploaded === 1 ? (
                 <button
@@ -266,7 +265,7 @@ function Map({ friendId }) {
                   className="submitButton"
                   onClick={handleSubmit}
                 >
-                  Add Pin
+                  ピンを置く
                 </button>
               ) : (
                 img && (
@@ -278,7 +277,7 @@ function Map({ friendId }) {
                     {loading ? (
                       <CircularProgress color="white" size="20px" />
                     ) : (
-                      " Upload"
+                      "アップロード"
                     )}
                   </button>
                 )

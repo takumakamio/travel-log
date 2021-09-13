@@ -1,18 +1,18 @@
-import Plus from "../../components/Plus/Plus";
 import Feed from "../../components/Feed/Feed";
 import Leftbar from "../../components/Leftbar/Leftbar";
-import Rightbar from "../../components/Rightbar/Rightbar";
-import "./friendPost.css";
+import { Grid } from "@material-ui/core";
 
 const FriendPost = () => {
   return (
     <>
-      <div className="friendPostContainer">
-        <Leftbar />
-        <Feed />
-
-        <Plus />
-      </div>
+      <Grid container>
+        <Grid item sm={2} xs={2}>
+          <Leftbar />
+        </Grid>
+        <Grid item sm={10} xs={10}>
+          <Feed />
+        </Grid>
+      </Grid>
     </>
   );
 };

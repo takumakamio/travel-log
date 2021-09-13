@@ -1,6 +1,5 @@
 import "./leftbar.css";
 import {
-  Bookmark,
   ExitToApp,
   Home,
   Laptop,
@@ -21,7 +20,7 @@ const Leftbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    window.location.replace("/login");
+    window.location.replace("/");
   };
 
   return (
@@ -31,12 +30,12 @@ const Leftbar = () => {
           <div className="leftbarTitleIcon">
             <LoyaltyIcon />
           </div>
-          <div className="leftbarTitleLetter">SHIORI </div>
+          <div className="leftbarTitleLetter">TraveLog</div>
         </div>
         <ul className="leftbarList">
           {user ? (
             <>
-              <Link to="/" className="link">
+              <Link to="/home" className="link">
                 <li className="leftbarListItem">
                   <Home className="leftbarIcon" />
                   <span className="leftbarListItemText">ホーム</span>
@@ -51,7 +50,7 @@ const Leftbar = () => {
               <Link to={`/profile/${user._id}`} className="link">
                 <li className="leftbarListItem">
                   <Person className="leftbarIcon" />
-                  <span className="leftbarListItemText">マイポスト</span>
+                  <span className="leftbarListItemText">マイページ</span>
                 </li>
               </Link>
               <Link to="/followers" className="link">

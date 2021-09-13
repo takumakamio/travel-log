@@ -17,7 +17,7 @@ const PostSchema = new mongoose.Schema(
       max: 60,
     },
     categories: {
-      type: Array,
+      type: String,
       required: false,
     },
     lng: {

@@ -1,5 +1,4 @@
 import "./rightbar.css";
-import Friend from "../Friend/Friend";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
@@ -68,87 +67,66 @@ export default function Rightbar({ user }) {
     history.push(`/map/${user._id}`);
   };
 
-  const HomeRightbar = () => {
-    return (
-      <>
-        <div className="birthdayContainer">
-          <img className="birthdayImg" src="assets/gift.png" alt="" />
-          <span className="birthdayText">
-            <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
-          </span>
-        </div>
-        <img className="rightbarAd" src="assets/ad.png" alt="" />
-        <h4 className="rightbarTitle">Online Friends</h4>
-        {/* <ul className="rightbarFriendList">
-          {Users.map((u) => (
-            <Friend key={u.id} user={u} />
-          ))}
-        </ul> */}
-      </>
-    );
-  };
+  return (
+    <>
+      <div className="rightbar">
+        <div className="rightbarWrapper">
+          <div className="profileRightbarContainer">
+            {user.username !== currentUser.username && (
+              <button className="rightbarFollowButton" onClick={handleClick}>
+                {followed ? "Unfollow" : "Follow"}
+                {followed ? <Remove /> : <Add />}
+              </button>
+            )}
+            <Link to={`/map/${user._id}`} className="Link">
+              <Map
+                className="mapIcon"
+                style={{
+                  fontSize: "50px",
+                  color: "teal",
+                  border: "5px solid",
+                  borderRadius: "50%",
+                  background: "#FFDAB9",
+                }}
+                onClick={handleToMap}
+              />
+            </Link>
 
-  const ProfileRightbar = () => {
-    return (
-      <>
-        <div className="profileRightbarContainer">
-          {user.username !== currentUser.username && (
-            <button className="rightbarFollowButton" onClick={handleClick}>
-              {followed ? "Unfollow" : "Follow"}
-              {followed ? <Remove /> : <Add />}
-            </button>
-          )}
-          <Link to={`/map/${user._id}`} className="Link">
-            <Map
-              style={{
-                fontSize: "60px",
-                color: "teal",
-              }}
-              onClick={handleToMap}
-            />
-          </Link>
-
-          <h4 className="rightbarTitle">ユーザー情報</h4>
-          <div className="rightbarInfo">
-            <div className="rightbarInfoItem">
-              <span className="rightbarInfoKey">居住地:</span>
-              <span className="rightbarInfoValue">{user.city}</span>
+            <h4 className="rightbarTitle">ユーザー情報</h4>
+            <div className="rightbarInfo">
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">居住地:</span>
+                <span className="rightbarInfoValue">{user.city}</span>
+              </div>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">出身:</span>
+                <span className="rightbarInfoValue">{user.from}</span>
+              </div>
             </div>
-            <div className="rightbarInfoItem">
-              <span className="rightbarInfoKey">出身:</span>
-              <span className="rightbarInfoValue">{user.from}</span>
-            </div>
-          </div>
-          <h4 className="rightbarTitle">フォロー</h4>
-          <div className="rightbarFollowings">
-            {friends.map((friend) => (
-              <Link to={"/profile/" + friend._id} className="Link">
+            <h4 className="rightbarTitle">フォロー</h4>
+            <div className="rightbarFollowings">
+              {friends.map((friend) => (
                 <div className="rightbarFollowing">
-                  <img
-                    src={
-                      friend.profilePicture
-                        ? friend.profilePicture.img
-                        : PF + "/noAvatar.png"
-                    }
-                    alt=""
-                    className="rightbarFollowingImg"
-                  />
+                  <Link to={"/profile/" + friend._id} className="Link">
+                    <img
+                      src={
+                        friend.profilePicture
+                          ? friend.profilePicture.img
+                          : PF + "/noAvatar.png"
+                      }
+                      alt=""
+                      className="rightbarFollowingImg"
+                    />{" "}
+                  </Link>
                   <span className="rightbarFollowingName">
                     {friend.username}
                   </span>
                 </div>
-              </Link>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </>
-    );
-  };
-  return (
-    <div className="rightbar">
-      <div className="rightbarWrapper">
-        {user ? <ProfileRightbar /> : <HomeRightbar />}
       </div>
-    </div>
+    </>
   );
 }

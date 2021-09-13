@@ -35,9 +35,9 @@ export default function Register() {
 
   return (
     <div className="register">
-      <span className="registerTitle">Register</span>
+      <span className="registerTitle">レジスター</span>
       <form className="registerForm" onSubmit={handleSubmit}>
-        <label>Username</label>
+        <label>名前</label>
         <input
           className="registerInput"
           type="text"
@@ -45,7 +45,7 @@ export default function Register() {
           required
           ref={username}
         />
-        <label>Email</label>
+        <label>Eメール</label>
         <input
           className="registerInput"
           required
@@ -53,7 +53,7 @@ export default function Register() {
           placeholder="Enter your email..."
           ref={email}
         />
-        <label>Password</label>
+        <label>パスワード</label>
         <input
           placeholder="Password"
           required
@@ -68,12 +68,13 @@ export default function Register() {
           ref={passwordAgain}
           className="registerInput"
           type="password"
+          minLength="6"
         />
-        <button className="registerButton">Register</button>
+        <button className="registerButton">レジスター</button>
       </form>
       <button className="registerLoginButton" type="submit">
         <Link to="/login" className="link">
-          LOGIN
+          ログイン
         </Link>
       </button>
       {error && (
