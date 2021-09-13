@@ -1,21 +1,20 @@
-import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
-import PublicIcon from "@material-ui/icons/Public";
-import "./settings.css";
 import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth/AuthContext";
-import Rightbar from "../../components/Rightbar/Rightbar";
 import Leftbar from "../../components/Leftbar/Leftbar";
 import storage from "../../firebase";
-import { CircularProgress } from "@material-ui/core";
+import { Grid, CircularProgress } from "@material-ui/core";
+import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
+import "./settings.css";
 
 export default function Settings() {
   const [username, setUsername] = useState();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [city, setCity] = useState();
+  const [from, setFrom] = useState();
   const [success, setSuccess] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
-  const [coverPicture, setCoverPicture] = useState(null);
   const [uploaded, setUploaded] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -42,10 +41,8 @@ export default function Settings() {
             setProfilePicture((prev) => {
               return { ...prev, [item.label]: url };
             });
-            setCoverPicture((prev) => {
-              return { ...prev, [item.label]: url };
-            });
             setUploaded((prev) => prev + 1);
+            setLoading(false);
           });
         }
       );
@@ -61,14 +58,16 @@ export default function Settings() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: "UPDATE_START" });
+    setLoading(true);
     const updatedUser = {
       userId: user._id,
       username,
       email,
       profilePicture,
       password,
+      city,
+      from,
     };
-
     try {
       const res = await axios.put("/users/" + user._id, updatedUser, {
         headers: {
@@ -76,97 +75,111 @@ export default function Settings() {
             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
         },
       });
-      setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      setLoading(false);
+      setSuccess(true);
     } catch (err) {
       dispatch({ type: "UPDATE_FAILURE" });
     }
   };
+
   return (
     <div className="settings">
-      <Leftbar />
-      <div className="settingsWrapper">
-        <div className="settingsTitle">
-          <span className="settingsUpdateTitle">Update Your Account</span>
-          <span className="settingsDeleteTitle">Delete Account</span>
-        </div>
-        <form className="settingsForm" onSubmit={handleSubmit}>
-          <label>Profile Picture</label>
-          <div className="settingsPP">
-            <img
-              src={
-                user.profilePicture
-                  ? user.profilePicture.img
-                  : PF + "/noAvatar.png"
-              }
-              alt=""
-            />
-            <label htmlFor="file">
-              <PersonRoundedIcon className="settingsPPIcon" />
-            </label>
+      <Grid item sm={2} xs={2}>
+        <Leftbar />
+      </Grid>
+      <Grid item sm={10} xs={10}>
+        <div className="settingsWrapper">
+          <div className="settingsTitle"></div>
+          <form className="settingsForm" onSubmit={handleSubmit}>
+            <label>プロフィール写真</label>
+            <div className="settingsPP">
+              <img
+                src={
+                  user.profilePicture
+                    ? user.profilePicture.img
+                    : PF + "/noAvatar.png"
+                }
+                alt=""
+              />
+              <label htmlFor="file">
+                <PersonRoundedIcon className="settingsPPIcon" />
+              </label>
+              <input
+                style={{ display: "none" }}
+                type="file"
+                id="file"
+                accept=".png,.jpeg,.jpg"
+                onChange={(e) => setProfilePicture(e.target.files[0])}
+              />
+            </div>
+            {profilePicture && (
+              <button
+                className="settingsSubmitButton"
+                onClick={handleUpload}
+                disabled={loading}
+              >
+                {loading && profilePicture ? (
+                  <CircularProgress color="white" size="20px" />
+                ) : (
+                  profilePicture && <span>写真をアップロード</span>
+                )}
+              </button>
+            )}
+            <label>ユーザーネーム</label>
             <input
-              style={{ display: "none" }}
-              type="file"
-              id="file"
-              accept=".png,.jpeg,.jpg"
-              onChange={(e) => setProfilePicture(e.target.files[0])}
+              type="text"
+              required
+              defaultValue={user.username}
+              onChange={(e) => setUsername(e.target.value)}
             />
-          </div>
-
-          <label>Username</label>
-          <input
-            type="text"
-            required
-            defaultValue={user.username}
-            placeholder={user.username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <label>Email</label>
-          <input
-            type="email"
-            required
-            defaultValue={user.email}
-            placeholder={user.email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            required
-            minLength="6"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          {uploaded === 1 ? (
+            <label>Eメール</label>
+            <input
+              type="email"
+              required
+              defaultValue={user.email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label>出身</label>
+            <input
+              type="text"
+              defaultValue={user.from}
+              onChange={(e) => setFrom(e.target.value)}
+            />
+            <label>居住地</label>
+            <input
+              type="text"
+              defaultValue={user.city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <label>パスワード</label>
+            <input
+              type="password"
+              required
+              minLength="6"
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <button
               type="submit"
               className="settingsSubmitButton"
               onClick={handleSubmit}
             >
-              Update
+              アップデート
             </button>
-          ) : (
-            <button
-              className="settingsSubmitButton"
-              onClick={handleUpload}
-              disabled={loading}
-            >
-              {loading ? (
-                <CircularProgress color="white" size="20px" />
-              ) : (
-                " Upload"
-              )}
-            </button>
-          )}
-          {success && (
-            <span
-              style={{ color: "green", textAlign: "center", marginTop: "20px" }}
-            >
-              Profile has been updated...
-            </span>
-          )}
-        </form>
-      </div>
+            {success && (
+              <span
+                style={{
+                  color: "green",
+                  textAlign: "center",
+                  marginTop: "20px",
+                }}
+              >
+                更新完了...
+              </span>
+            )}
+          </form>
+        </div>
+      </Grid>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import "./post.css";
-import { MoreVert } from "@material-ui/icons";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
@@ -57,7 +56,7 @@ const Post = ({ post }) => {
           },
         }
       );
-      window.location.replace(`/profile/${currentUser.username}`);
+      window.location.replace(`/profile/${currentUser._id}`);
     } catch (err) {}
   };
 
@@ -102,7 +101,12 @@ const Post = ({ post }) => {
               alt=""
             />
 
-            <span className="postLikeCounter">{like} people like it</span>
+            <span className="postLikeCounter">{like} いいね</span>
+          </div>
+          <div className="postBottomRight">
+            <span className="postCategoryText">
+              カテゴリー: {post.categories}
+            </span>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth/AuthContext";
+import { Grid } from "@material-ui/core";
 
 const List = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -55,57 +56,67 @@ const List = () => {
   return (
     <>
       <div className="listContainer">
-        <div className="listWrapper">
-          <h4 className="listTitle">フォロー ({followings.length}人)</h4>
-          <div className="listFollowings">
-            {followings.map((following) => (
-              <Link
-                to={"/profile/" + following._id}
-                style={{ textDecoration: "none" }}
-              >
+        <Grid item sm={6} xs={6}>
+          <div className="listWrapper">
+            <h4 className="listTitleFollowings">
+              フォロー ({followings.length}人)
+            </h4>
+            <div className="listFollowings">
+              {followings.map((following) => (
                 <div className="listFollowingWrapper">
-                  <img
-                    src={
-                      following.profilePicture
-                        ? PF + following.profilePicture
-                        : PF + "/noAvatar.png"
-                    }
-                    alt=""
-                    className="listFollowingImg"
-                  />
+                  <Link
+                    to={"/profile/" + following._id}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <img
+                      src={
+                        following.profilePicture
+                          ? PF + following.profilePicture
+                          : PF + "/noAvatar.png"
+                      }
+                      alt=""
+                      className="listFollowingImg"
+                    />
+                  </Link>
                   <span className="listFollowingName">
                     {following.username}
                   </span>
                 </div>
-              </Link>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </Grid>
 
-        <div className="listWrapper">
-          <h4 className="listTitle">フォロワー({followers.length}人)</h4>
-          <div className="listFollowings">
-            {followers.map((follower) => (
-              <Link
-                to={"/profile/" + follower._id}
-                style={{ textDecoration: "none" }}
-              >
-                <div className="listFollowingWrapper">
-                  <img
-                    src={
-                      follower.profilePicture
-                        ? PF + follower.profilePicture
-                        : PF + "/noAvatar.png"
-                    }
-                    alt=""
-                    className="listFollowingImg"
-                  />
-                  <span className="listFollowingName">{follower.username}</span>
-                </div>
-              </Link>
-            ))}
+        <Grid item sm={6} xs={6}>
+          <div className="listWrapper">
+            <h4 className="listTitleFollowers">
+              フォロワー({followers.length}人)
+            </h4>
+            <div className="listFollowings">
+              {followers.map((follower) => (
+                <Link
+                  to={"/profile/" + follower._id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="listFollowingWrapper">
+                    <img
+                      src={
+                        follower.profilePicture
+                          ? PF + follower.profilePicture
+                          : PF + "/noAvatar.png"
+                      }
+                      alt=""
+                      className="listFollowersImg"
+                    />
+                    <span className="listFollowersName">
+                      {follower.username}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
+        </Grid>
       </div>
     </>
   );

@@ -74,3 +74,9 @@
 .postLikeCounter {
   font-size: 15px;
 }
+
+.postCategoryText {
+  cursor: pointer;
+  border-bottom: 1px dashed gray;
+  font-size: 15px;
+}

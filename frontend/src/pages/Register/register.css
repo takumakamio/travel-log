@@ -1,5 +1,5 @@
 .register {
-  height: calc(100vh - 50px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,17 +8,20 @@
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    url("https://cdn.pixabay.com/photo/2021/03/16/10/04/street-6099209_960_720.jpg");
   background-size: cover;
 }
 .registerTitle {
   font-size: 50px;
+  font-weight: bold;
+  color: orangered;
 }
 
 .registerForm {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  font-weight: bold;
 }
 
 .registerForm > label {
@@ -30,6 +33,7 @@
   background-color: white;
   border: none;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .registerInput:focus {
@@ -49,7 +53,7 @@
 
 .registerLoginButton {
   position: absolute;
-  top: 60px;
+  top: 30px;
   right: 20px;
   background-color: teal;
   cursor: pointer;

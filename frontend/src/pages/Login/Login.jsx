@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const email = useRef();
   const password = useRef();
-  const { isFetching, error, dispatch } = useContext(AuthContext);
+  const { isFetching, dispatch } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,9 +21,9 @@ export default function Login() {
 
   return (
     <div className="login">
-      <span className="loginTitle">Login</span>
+      <span className="loginTitle">ログイン</span>
       <form className="loginForm" onSubmit={handleSubmit}>
-        <label>Email</label>
+        <label>Eメール</label>
         <input
           placeholder="Email"
           type="email"
@@ -32,7 +32,7 @@ export default function Login() {
           required
           autoComplete={true}
         />
-        <label>Password</label>
+        <label>パスワード</label>
         <input
           placeholder="Password"
           type="password"
@@ -45,13 +45,13 @@ export default function Login() {
           {isFetching ? (
             <CircularProgress color="white" size="20px" />
           ) : (
-            "Login"
+            "ログイン"
           )}
         </button>
       </form>
       <button className="loginRegisterButton">
         <Link className="link" to="/register">
-          Register
+          レジスター
         </Link>
       </button>
     </div>

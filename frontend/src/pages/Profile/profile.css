@@ -2,10 +2,6 @@
   display: flex;
 }
 
-.profileRight {
-  flex: 10;
-}
-
 .profileCover {
   height: 320px;
   position: relative;
@@ -47,4 +43,21 @@
 
 .profileRightBottom {
   display: flex;
+}
+.profileRightBottomRightbar {
+  margin: 0 20% 0 0;
+}
+
+@media screen and (max-width: 480px) {
+  .profileRightBottomFeed {
+    display: none;
+  }
+
+  .profileRightBottomRightbar {
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    margin: 5px 20px 0;
+  }
 }

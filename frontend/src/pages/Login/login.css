@@ -1,5 +1,5 @@
 .login {
-  height: calc(100vh - 50px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,17 +8,20 @@
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url("https://images.pexels.com/photos/768473/pexels-photo-768473.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+    url("https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014_960_720.jpg");
   background-size: cover;
 }
 .loginTitle {
   font-size: 50px;
+  font-weight: bold;
+  color: teal;
 }
 
 .loginForm {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  font-weight: bold;
 }
 
 .loginForm > label {
@@ -45,6 +48,7 @@
   border: none;
   border-radius: 10px;
   text-align: center;
+  margin-left: 20px;
 }
 
 .loginButton:disabled {
@@ -54,7 +58,7 @@
 
 .loginRegisterButton {
   position: absolute;
-  top: 60px;
+  top: 30px;
   right: 20px;
   background-color: lightcoral;
   cursor: pointer;

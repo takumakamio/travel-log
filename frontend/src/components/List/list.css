@@ -1,35 +1,44 @@
 .listContainer {
-  flex: 7;
   display: flex;
-  flex-direction: row;
   margin-left: 30px;
 }
 .listWrapper {
-  flex: 3.5;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   margin-top: 5%;
 }
-.listTitle {
+
+.listTitleFollowings {
   margin-bottom: 20px;
-  background-color: teal;
+  background-color: rgb(9, 75, 218);
   border-radius: 25px;
   max-width: 150px;
   padding: 10px;
   color: white;
   text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.listTitleFollowers {
+  margin-bottom: 20px;
+  background-color: rgb(6, 155, 63);
+  border-radius: 25px;
+  max-width: 150px;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 .listFriendList {
   padding: 0;
   margin: 0;
   list-style: none;
-}
-
-.listTitle {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 10px;
 }
 
 .listInfo {
@@ -69,35 +78,45 @@
 }
 
 .listFollowingImg {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   margin-top: 15px;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid;
-  border-color: rgb(2, 61, 31);
+  border-color: rgb(9, 75, 218);
 }
+
 .listFollowingName {
   margin: 0;
   text-decoration: none;
-  color: rgb(2, 61, 31);
+  color: rgb(9, 75, 218);
 }
 
-.listFollowButton {
-  margin-top: 30px;
-  margin-bottom: 10px;
-  border: none;
-  background-color: #1872f2;
-  color: white;
-  border-radius: 5px;
-  padding: 5px 10px;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
+.listFollowersImg {
+  width: 90px;
+  height: 90px;
+  margin-top: 15px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: rgb(6, 155, 63);
 }
 
-.listFollowButton:focus {
-  outline: none;
+.listFollowersName {
+  margin: 0;
+  text-decoration: none;
+  color: rgb(6, 155, 63);
+}
+
+@media screen and (max-width: 480px) {
+  .listWrapper {
+    margin-right: 10%;
+  }
+  .listTitleFollowings {
+    font-size: 12px;
+  }
+  .listTitleFollowers {
+    font-size: 12px;
+  }
 }

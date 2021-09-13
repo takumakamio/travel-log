@@ -1,10 +1,6 @@
 import { Grid } from "@material-ui/core";
-import Add from "../../components/Plus/Plus";
 import Map from "../../components/Map/Map";
-import Feed from "../../components/Feed/Feed";
 import Leftbar from "../../components/Leftbar/Leftbar";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router";
 
 const FriendMap = () => {
@@ -20,7 +16,6 @@ const FriendMap = () => {
           <Map friendId={friendId} />
         </Grid>
       </Grid>
-      <Add />
     </div>
   );
 };

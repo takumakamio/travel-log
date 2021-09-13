@@ -15,6 +15,7 @@ import MyMap from "./pages/MyMap/MyMap";
 import FriendPost from "./pages/FriendPost/FriendPost";
 import ListPage from "./pages/ListPage/ListPage";
 import FriendMap from "./pages/FriendMap/FriendMap";
+import Top from "./pages/Top/Top";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -23,13 +24,16 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
+          <Top />
+        </Route>
+        <Route exact path="/home">
           <Home />
         </Route>
         <Route exact path="/register">
           {user ? <Home /> : <Register />}
         </Route>
         <Route exact path="/login">
-          {user ? <Redirect to="/" /> : <Login />}
+          {user ? <Redirect to="/home" /> : <Login />}
         </Route>
         <Route exact path="/map">
           {user ? <MyMap /> : <Login />}
@@ -43,7 +47,7 @@ function App() {
           {user ? <ListPage /> : <Login />}
         </Route>
         <Route path={`/settings/${user?._id}`}>
-          {user ? <Settings /> : <Register />}
+          {user ? <Settings /> : <Login />}
         </Route>
       </Switch>
     </Router>

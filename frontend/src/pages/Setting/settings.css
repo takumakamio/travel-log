@@ -3,32 +3,17 @@
 }
 
 .settingsWrapper {
-  flex: 10;
-  padding: 20px;
-}
-
-.settingsTitle {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.settingsTitleUpdate {
-  font-size: 30px;
-  margin-bottom: 20px;
-  color: lightcoral;
-}
-
-.settingsTitleDelete {
-  color: red;
-  font-size: 12px;
-  cursor: pointer;
+  justify-content: center;
+  margin-top: 3%;
 }
 
 .settingsForm {
   display: flex;
+  width: 30%;
   flex-direction: column;
 }
+
 .settingsPP {
   display: flex;
   align-items: center;
@@ -93,7 +78,24 @@
   display: flex;
   justify-content: center;
 }
+.settingsSubmitText {
+  align-self: center;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: rgb(0, 155, 155);
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
 
 .settingsSubmitButton:hover {
   background-color: rgb(1, 114, 114);
+}
+
+@media screen and (max-width: 480px) {
+  .settingsForm {
+    width: 70%;
+  }
 }
