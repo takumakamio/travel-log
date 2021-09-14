@@ -31,5 +31,5 @@
   - pm2
 
 ## LIVE SITE
-- https://trave-log.herokuapp.com/home
+https://trave-log.herokuapp.com
 
