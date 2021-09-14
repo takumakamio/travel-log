@@ -32,4 +32,6 @@
 
 ## LIVE SITE
 https://trave-log.herokuapp.com
-
+- テストアカウント
+email: kamio@gmail.com
+password: aaaaaa
