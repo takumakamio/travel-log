@@ -10,16 +10,17 @@
 
 ## 開発環境
 - OS：Mac
-- スタック：React.js、Node.js,Express.js,MongoDB
-- ライブラリ：
+- スタック：React.js, Node.js, Express.js, MongoDB
+
+## ライブラリ：
 
 - フロントエンド
   - Material UI
   - MAP-GL
   - axios
   - react-router-dom
-  
-  - バックエンド
+
+- バックエンド
   - Firebase storage
   - cors 
   - crypto-js 
