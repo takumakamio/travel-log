@@ -11,6 +11,7 @@
 ## 開発環境
 - OS：Mac
 - スタック：React.js, Node.js, Express.js, MongoDB
+- IDE：VS Code
 
 ## ライブラリ：
 
@@ -29,6 +30,3 @@
   - mongoose
   - crypto-js
   - pm2
-  
-
-- IDE：VS Code
