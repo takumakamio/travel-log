@@ -22,11 +22,10 @@
   - react-router-dom
 
 - バックエンド
+  - express
+  - mongoose
   - Firebase storage
   - cors 
-  - crypto-js 
-  - express
-  - jsonwebtoken
-  - mongoose
+  - JWT
   - crypto-js
   - pm2
