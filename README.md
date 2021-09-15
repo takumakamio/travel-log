@@ -9,7 +9,6 @@
 - 誰でも
 
 ## 開発環境
-- OS：Mac
 - スタック：React.js, Node.js, Express.js, MongoDB
 - IDE：VS Code
 
