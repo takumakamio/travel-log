@@ -16,7 +16,7 @@
 
 - フロントエンド
   - Material UI
-  - MAP-GL
+  - MAPBOX
   - axios
   - react-router-dom
 
