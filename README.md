@@ -21,8 +21,8 @@
   - react-router-dom
 
 - バックエンド
-  - express
-  - mongoose
+  - Express
+  - Mongoose
   - Firebase storage
   - cors 
   - JWT
