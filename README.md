@@ -15,7 +15,7 @@
 ## ライブラリ：
 
 - フロントエンド
-  - material ui
+  - Material ui
   - MAPBOX
   - axios
   - react-router-dom
