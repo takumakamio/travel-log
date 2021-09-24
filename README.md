@@ -10,7 +10,6 @@
 
 ## 開発環境
 - スタック：React.js, Node.js, Express.js, MongoDB
-- IDE：VS Code
 
 ## ライブラリ：
 
