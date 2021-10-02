@@ -20,7 +20,7 @@
   - react-router-dom
 
 - バックエンド
-  - xpress
+  - express
   - Mongoose
   - Firebase storage
   - cors 
