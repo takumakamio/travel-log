@@ -1,3 +1,9 @@
+## LIVE SITE
+https://trave-log.herokuapp.com
+- テストアカウント
+- Email: kamio@gmail.com
+- password: aaaaaa
+
 ## TraveLog　概要
 - マップにピンを置くことで地図上に旅の記録ができます
 - フォローした人物の旅の記録を確認できます
@@ -27,9 +33,3 @@
   - JWT
   - crypto-js
   - pm2
-
-## LIVE SITE
-https://trave-log.herokuapp.com
-- テストアカウント
-- Email: kamio@gmail.com
-- password: aaaaaa
