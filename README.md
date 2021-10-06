@@ -15,7 +15,7 @@ https://trave-log.herokuapp.com
 - 誰でも
 
 ## 開発環境
-- スタック：React.js, Node.js, Express.js, MongoDB
+- スタック：React, Node.js, Express.js, MongoDB
 
 ## ライブラリ：
 
