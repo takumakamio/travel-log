@@ -12,7 +12,7 @@ https://trave-log.herokuapp.com
 - MAPBOXを活用し旅の記録を保存、他人に思い出をシェアできるSNSアプリケーション
 
 ### ターゲットユーザー
-- 誰でも
+- 旅行の記録をつけたい人
 
 ## 開発環境
 - スタック：React, Node.js, Express.js, MongoDB
