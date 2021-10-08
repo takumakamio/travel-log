@@ -31,5 +31,5 @@ https://trave-log.herokuapp.com
   - Firebase storage
   - cors 
   - JWT
-  - crypto-js
+  - crypto.js
   - pm2
