@@ -21,7 +21,7 @@ https://trave-log.herokuapp.com
 
 - フロントエンド
   - Material ui
-  - MAPBOX
+  - Mapbox
   - axios
   - react-router-dom
 
